@@ -1,0 +1,30 @@
+unit AdsDebug;
+
+// ******************************************************
+//          DelphiARX2002 ADS Program Debug Tool
+//
+//     Copyright(C)2008 medialayse corporation.
+//     2008-05-15  SOFTWARE DESIGN ATELIER SITE
+// ******************************************************
+
+interface
+
+{$DEFINE DARXFORM}
+
+// [ENG] The display of the result buffer.
+// [JPN] リザルトバッファリストの表示
+procedure darx_DebugResBuf(const ShowCaption: AnsiString; const ResBuf: PResBuf);
+
+// [ENG] It acquires the result buffer from the entity name and it displays it.
+// [JPN] エンティティ名からリザルトバッファを取得して表示
+procedure darx_DebugLName(const ShowCaption: AnsiString; const LName: Tads_name);
+
+// [ENG] It closes a debugging window.
+// [JPN] デバッグウィンドウを閉じる
+procedure darx_DebugClose;
+
+implementation
+
+{$R *.DFM}
+
+end.

@@ -1,0 +1,51 @@
+unit DArxLib;
+
+
+// ******************************************************
+//     DelphiARX2002 Runtime Core Module.
+//
+//     Copyright(C)2008 medialayse corporation.
+//     2008-05-15  SOFTWARE DESIGN ATELIER SITE
+// ******************************************************
+
+interface
+
+type
+  TDAcadVersion = (davUNKNOWN, davACAD2000, davACAD2000i, davACAD2002, davACLT2000, davACLT2000i, davACLT2002);
+
+
+// [ENG] Returns the module handle of AutoCAD.
+// 実行中のAutoCADのモジュールハンドルを返す
+function Acad_Module: HMODULE;
+
+// [ENG] It returns the version identifier of AutoCAD to be executing.
+// [JPN] 実行中のAutoCADのバージョン識別子を返す
+function Arx_Version: TDAcadVersion;
+
+// [ENG] Returns True if AutoCAD to be executing is Release edition.
+// [JPN] 実行中のAutoCADがRelease版ならTrueを返す
+function Acad_Release: Boolean;
+
+// [ENG] Gets the execution file name to have called itself.
+// [JPN] 自らをコールした実行ファイル名を得る
+function Acad_ExeName: AnsiString;
+
+// [ENG] Gets its own file name.
+// [JPN] 自らのファイル名を得る
+function Acad_DrxName: AnsiString;
+
+// [ENG] Gets its runtime arx file name.
+// [JPN] ランタイムＡＲＸのファイル名を得る
+function Acad_ArxName: AnsiString;
+
+// [ENG] Gets its registory path of the AutoCAD
+// [JPN] AutoCADのレジストリパスを得る
+function Acad_RegPath: AnsiString;
+
+// [ENG] It returns the version of AutoCAD.
+// [JPN] AutoCADのバージョンを返す
+function Acad_GetVersion: AnsiString;
+
+implementation
+
+end.

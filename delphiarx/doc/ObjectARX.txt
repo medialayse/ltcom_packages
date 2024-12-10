@@ -1,0 +1,102 @@
+=============================================================================
+           DelphiARX2002 Version1.30   ObjectARX クラス互換性表
+
+                Copyright(C)2008 medialayse corporation.
+                2008-05-15  SOFTWARE DESIGN ATELIER SITE
+=============================================================================
+
+DelphiARX2002 では、ObjectARX のクラス名の頭に「 T 」をつけたものが
+同じクラスを現わしています。（ AcRxObject → TAcRxObject ）
+下記は、DelphiARX2002 にて定義されているクラスの一覧です。
+なお、これらのクラスの大半は、グローバルオブジェクトが生成されている
+ものがほとんどですので、自らオブジェクトを構築して使わないようご注意
+ください。
+
+[AcRxClasses]
+  TAcRxObject = class;
+
+[Application Managment]
+  TAcDbHostApplicationServices = class;
+  TAcApDocManager = class;
+  TAcApDocument = class;
+  TAcApLongTransactionManager = class;
+  TAcApProfileManager = class;
+  TAcApProfileManagerReactor = class;
+
+[Paperspace Layouts]
+  TAcDbLayoutManager = class;
+  TAcApLayoutManager = class;
+
+[Notification]
+  TAcApDocManagerReactor = class;
+  TAcApLongTransactionReactor = class;
+  TAcDbLayoutManagerReactor = class;
+  TAcEdInputContextReactor = class;
+  TAcRxDLinkerReactor = class;
+  TAcRxEventReactor = class;
+  TAcEditorReactor = class;
+  TAcTransactionReactor = class;
+
+[Iterators]
+  TAcApDocumentIterator = class;
+  TAcRxIterator = class;
+  - TAcRxDictionaryIterator = class;
+  TAcEdCommandIterator = class;
+
+[Transactions]
+  TAcTransaction = class;
+  - TAcDbTransactionManager = class;
+  TAcTransactionManager = class;
+
+[AutoCAD Editor]
+  TAcEdCommand = class;
+  TAcEdCommandStack = class;
+  TAcEdUIContext = class;
+  TAcEdInputPointFilter = class;
+  TAcEdInputPointMonitor = class;
+  TAcEdInputPointManager = class;
+  TAcEdSolidSubentitySelector = class;
+
+[ARXRuntime]
+  TAcRxClass = class;
+  TAcRxDictionary = class;
+  TAcRxDynamicLinker = class;
+  TAcRxEvent = class;
+  - TAcEditor = class;
+  TAcRxService = class;
+  - TAcRxKernel = class;
+  - TAcDbServices = class;
+  - TAcEdServices = class;
+
+[ReferenceEditing]
+  TAcEdXrefFileLock = class;
+
+[Graphics]
+  TAcGiCommonDraw = class;
+  - TAcGiViewportDraw = class;
+  - TAcGiWorldDraw = class;
+  TAcGiContext = class;
+  TAcGiEdgeData = class;
+  TAcGiFaceData = class;
+  TAcGiGeometry = class;
+  - TAcGiViewportGeometry = class;
+  - TAcGiWorldGeometry = class;
+  TAcGiSubEntityTraits = class;
+  - TAcGiDrawableTraits = class;
+  TAcGiTextStyle = class;
+  TAcGiVertexData = class;
+  TAcGiViewport = class;
+  TAcGiDrawable = class;
+
+[Database Objects]
+  TAcDbObject = class;
+
+[DatabaseRelated]
+  TAcDbDatabase = class;
+
+[Entities]
+  TAcDbEntitiy = class;
+
+[etc]
+  TAcLispAppInfo = class;
+  TAcRxServicePrototype = class;

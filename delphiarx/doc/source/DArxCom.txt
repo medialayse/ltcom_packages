@@ -1,0 +1,142 @@
+unit DArxCom;
+
+// ******************************************************
+//         DelphiARX2002 Com Object Library
+//
+//     Copyright(C)2008 medialayse corporation.
+//     2008-05-15  SOFTWARE DESIGN ATELIER SITE
+// ******************************************************
+
+interface
+
+uses
+  ComObj, AcApCLib, DArxReac, ACAD_TLB, DArxH;
+
+type
+  // [ENG] TAcadLayerStateManager is AutoCAD2000i only.
+  // [JPN] TAcadLayerStateManager は AutoCAD2000i のみ利用できます。
+
+  TDArxComManager = class(TDArxDocumentReactor)
+  private
+    FAcadApp: IAcadApplication;
+    // IAcadApplication objects
+    FDocument: IAcadDocument;
+    FDocuments: IAcadDocuments;
+    FPreferences: IAcadPreferences;
+    FMenuBar: IAcadMenuBar;
+    FMenuGroups: IAcadMenuGroups;
+    // IAcadDocument objects
+    FModelSpace: IAcadModelSpace;
+    FPaperSpace: IAcadPaperSpace;
+    FPlot: IAcadPlot;
+    FLayer: IAcadLayer;
+    FLinetype: IAcadLineType;
+    FDimStyle: IAcadDimStyle;
+    FTextStyle: IAcadTextStyle;
+    FUCS: IAcadUCS;
+    FViewport: IAcadViewport;
+    FPViewport: IAcadPViewport;
+    FSelectionSets: IAcadSelectionSets;
+    FSelectionSet: IAcadSelectionSet;
+    FUtility: IAcadUtility;
+    FPickfirstSelectionSet: IAcadSelectionSet;
+    FLayout: IAcadLayout;
+    FDatabase: IAcadDatabase;
+  protected
+    procedure LoadCreated; override;
+    procedure UnloadDestory; override;
+  public
+    // IAcadApplication objects
+    function IDocument(Dispath: Boolean = False): IAcadDocument;
+    function IDocuments(Dispath: Boolean = False): IAcadDocuments;
+    function IPreferences(Dispath: Boolean = False): IAcadPreferences;
+    function IMenuBar(Dispath: Boolean = False): IAcadMenuBar;
+    function IMenuGroups(Dispath: Boolean = False): IAcadMenuGroups;
+    // IAcadDocument objects
+    function IModelSpace(Dispath: Boolean = False): IAcadModelSpace;
+    function IPaperSpace(Dispath: Boolean = False): IAcadPaperSpace;
+    function IPlot(Dispath: Boolean = False): IAcadPlot;
+    function ILayer(Dispath: Boolean = False): IAcadLayer;
+    function ILinetype(Dispath: Boolean = False): IAcadLineType;
+    function IDimStyle(Dispath: Boolean = False): IAcadDimStyle;
+    function ITextStyle(Dispath: Boolean = False): IAcadTextStyle;
+    function IUCS(Dispath: Boolean = False): IAcadUCS;
+    function IViewport(Dispath: Boolean = False): IAcadViewport;
+    function IPViewport(Dispath: Boolean = False): IAcadPViewport;
+    function ISelectionSets(Dispath: Boolean = False): IAcadSelectionSets;
+    function ISelectionSet(Dispath: Boolean = False): IAcadSelectionSet;
+    function IUtility(Dispath: Boolean = False): IAcadUtility;
+    function IPickfirstSelectionSet(Dispath: Boolean = False): IAcadSelectionSet;
+    function ILayout(Dispath: Boolean = False): IAcadLayout;
+    function IDatabase(Dispath: Boolean = False): IAcadDatabase;
+    // IAcadApplication
+    property IAcadApp: IAcadApplication read FAcadApp;
+  end;
+
+  TDArxComApplication = class(TObject)
+  private
+    FAddRefMode: LongBool;
+    FAcadApp: IAcadApplication;
+    // IAcadApplication objects
+    FDocument: IAcadDocument;
+    FDocuments: IAcadDocuments;
+    FPreferences: IAcadPreferences;
+    FMenuBar: IAcadMenuBar;
+    FMenuGroups: IAcadMenuGroups;
+    // IAcadDocument objects
+    FModelSpace: IAcadModelSpace;
+    FPaperSpace: IAcadPaperSpace;
+    FPlot: IAcadPlot;
+    FLayer: IAcadLayer;
+    FLinetype: IAcadLineType;
+    FDimStyle: IAcadDimStyle;
+    FTextStyle: IAcadTextStyle;
+    FUCS: IAcadUCS;
+    FViewport: IAcadViewport;
+    FPViewport: IAcadPViewport;
+    FSelectionSets: IAcadSelectionSets;
+    FSelectionSet: IAcadSelectionSet;
+    FUtility: IAcadUtility;
+    FPickfirstSelectionSet: IAcadSelectionSet;
+    FLayout: IAcadLayout;
+    FDatabase: IAcadDatabase;
+  public
+    constructor Create(AddRef: LongBool = False); virtual;
+    destructor Destroy; override;
+    // IAcadApplication objects
+    function Document(Dispath: Boolean = False): IAcadDocument;
+    function Documents(Dispath: Boolean = False): IAcadDocuments;
+    function Preferences(Dispath: Boolean = False): IAcadPreferences;
+    function MenuBar(Dispath: Boolean = False): IAcadMenuBar;
+    function MenuGroups(Dispath: Boolean = False): IAcadMenuGroups;
+    // IAcadDocument objects
+    function ModelSpace(Dispath: Boolean = False): IAcadModelSpace;
+    function PaperSpace(Dispath: Boolean = False): IAcadPaperSpace;
+    function Plot(Dispath: Boolean = False): IAcadPlot;
+    function Layer(Dispath: Boolean = False): IAcadLayer;
+    function Linetype(Dispath: Boolean = False): IAcadLineType;
+    function DimStyle(Dispath: Boolean = False): IAcadDimStyle;
+    function TextStyle(Dispath: Boolean = False): IAcadTextStyle;
+    function UCS(Dispath: Boolean = False): IAcadUCS;
+    function Viewport(Dispath: Boolean = False): IAcadViewport;
+    function PViewport(Dispath: Boolean = False): IAcadPViewport;
+    function SelectionSets(Dispath: Boolean = False): IAcadSelectionSets;
+    function SelectionSet(Dispath: Boolean = False): IAcadSelectionSet;
+    function Utility(Dispath: Boolean = False): IAcadUtility;
+    function PickfirstSelectionSet(Dispath: Boolean = False): IAcadSelectionSet;
+    function Layout(Dispath: Boolean = False): IAcadLayout;
+    function Database(Dispath: Boolean = False): IAcadDatabase;
+    // IAcadApplication
+    property AcadApp: IAcadApplication read FAcadApp;
+  end;
+
+function NoParam: OleVariant;
+
+function Ads3DPoint(const VariantPt: OleVariant): TAds_Point;
+function Var3DPoint(X: Double = 0; Y: Double = 0; Z: Double = 0): OleVariant; overload;
+function Var3DPoint(Point: TAds_Point): OleVariant; overload;
+function VarPointsArray(Point: array of TAds_Point): OleVariant;
+
+implementation
+
+end.

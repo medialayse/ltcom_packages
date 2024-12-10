@@ -1,0 +1,47 @@
+package AcadTool;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'AutoCAD Customize Tool Components D6'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  designide;
+
+contains
+  AcTolReg in 'AcTolReg.pas',
+  AcadFunc,
+  AcadVInf,
+  AcadUnit,
+  AcadDraw,
+  AcadClr,
+  AcadPlot,
+  AcadCtrl,
+  AcadDwgV,
+  AcClrDlg,
+  AcDwgDlg,
+  AcThread;
+
+end.

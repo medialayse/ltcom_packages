@@ -1,0 +1,1563 @@
+======================================================================
+       DOSLib5.1 for AutoCAD 2000/ LT2000 Series   BUILD5.1.0.7
+
+                         DOSLib LISP関数 説明書
+
+   Copyright(C)2002 Software Design Atelier.   All Rights Reserved.
+   Copyright(C)2007 medialayse corporation.    All Rights Reserved.
+======================================================================
+
+関数の使い方
+--------------------------------------------------
+
+dos_about  DOSLibのバージョンを表示
+  構文
+    (dos_about)
+  戻り値
+    nil
+  例
+    (dos_about)
+
+--------------------------------------------------
+
+dos_attrib ファイル属性の取得・設定
+  構文
+    (dos_attrib [filespec [bits]])
+  引数
+    filespec  ファイル名
+    bits  0  通常
+          1  読み取り専用
+          2  隠しファイル
+          4  システム
+          8  アーカイブ
+  戻り値
+    成功  ファイル名と属性の数値のリスト
+    失敗  nil
+  例
+    (dos_attrib)
+    (dos_attrib "*.dwg")
+    (dos_attrib "c:\\projects\\*.dwg" 3)
+
+--------------------------------------------------
+
+dos_beep  ビープを鳴らす
+  構文
+    (dos_beep [type])
+  引数
+    type  0 Standard beep
+          1 System Asterisk
+          2 System Exclamation
+          3 System Hand
+          4 System Question
+          5 System Default
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_beep 1)
+
+--------------------------------------------------
+
+dos_capslock  Caps Lockの設定
+  構文
+    (dos_capslock [T])
+  引数
+    T  Caps LockをON
+  戻り値
+    Caps LockをON   T
+    Caps LockをOFF  nil
+  例
+    (dos_capslock T)
+    (dos_capslock)
+
+--------------------------------------------------
+
+dos_chdir  カレントディレクトリの変更
+  構文
+    (dos_chdir path)
+  引数
+    path
+  戻り値
+    成功  カレントディレクトリ
+    失敗  nil
+  例
+    (dos_chdir "test")
+    (dos_chdir "\\drawings")
+    (dos_chdir "z:\\")
+
+--------------------------------------------------
+
+dos_checklist  チェックリストのダイアログボックスの表示
+  構文
+    (dos_checklist title message assoc-list)
+  引数
+    title       ダイアログのタイトル
+    message     ダイアログのメッセージ
+    assoc-list  項目名と状態のリスト
+  戻り値
+    成功  項目名と状態のリスト
+    失敗  nil
+  例
+    (setq xyz '(("layer1" . 0) ("Layer2" . 0) ("Layer3" . 0)))
+    (dos_checklist "Display Layers" "Layers to turn off" xyz)
+
+--------------------------------------------------
+
+dos_chkdsk  ドライブの使用状況を取得
+  構文
+    (dos_chkdsk [drive])
+  引数
+    drive  ドライブ名(C:, D:)
+  戻り値
+    成功  全容量、使用容量、空き容量のrealのリスト
+    失敗  nil
+  例
+    (dos_chkdsk)
+    (dos_chkdsk "c:")
+
+--------------------------------------------------
+
+dos_clipboard  クリップボードから取得・クリップボードへコピー
+  構文
+    (dos_clipboard [string])
+  引数
+    string  コピーする文字列
+  戻り値
+    成功  文字列
+    失敗  nil
+  例
+    (dos_clipboard)
+    (dos_clipboard "Hello World!")
+
+--------------------------------------------------
+
+dos_closeall  開いている全ての図面を閉じる (AutoCAD2000)
+  構文
+  (dos_closeall)
+  戻り値
+    nothing
+  例
+    (dos_closeall)
+
+--------------------------------------------------
+
+dos_combolist  コンボリストのダイアログボックスの表示
+  構文
+    (dos_combolist title message list [default])
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    list     項目のリスト
+    default  ダイアログの初期値
+  戻り値
+    成功  選択された項目名
+    失敗  nil
+  例
+    (setq xyz '("layer1" "Layer2" "Layer3"))
+    (dos_combolist "Display Layers" "Layer to turn off" xyz)
+
+--------------------------------------------------
+
+dos_command  DOSコマンドの実行
+  構文
+    (dos_command command-line [show])
+  引数
+    command-line  コマンド
+    show
+  戻り値
+    成功  実行したコマンド
+    失敗  nil
+  例
+    (dos_command "copy *.dwg a:")
+
+--------------------------------------------------
+
+dos_computer  コンピュータ名の取得・設定
+  構文
+    (dos_computer [computer])
+  引数
+    computer  コンピュータ名
+  戻り値
+    成功  コンピュータ名
+    失敗  nil
+  例
+    (dos_computer)
+    (dos_computer "SPEEDY")
+
+--------------------------------------------------
+
+dos_copy  ファイルのコピー
+  構文
+    (dos_copy srcfilename destfilename)
+  引数
+    srcfilename   元ファイル名
+    destfilename  新ファイル名
+  戻り値
+    成功  新ファイル名
+    失敗  nil
+  例
+    (dos_copy "drawing.dwg" "drawing.bak")
+    (dos_copy "drawing.dwg" "c:\\acad\\backup\\drawing.bak")
+    (dos_copy "drawing.dwg" "a:\\drawing.dwg")
+
+--------------------------------------------------
+
+dos_date  日付の取得・設定
+  構文
+    (dos_date [date])
+  引数
+    date  日付
+  戻り値
+    成功  日付
+    失敗  nil
+  例
+    (dos_date)
+    (dos_date "5-31-2002")
+
+--------------------------------------------------
+
+dos_delete  ファイルの削除
+  構文
+    (dos_delete filespec)
+  引数
+    filespec  削除するファイル名
+  戻り値
+    成功  削除されたファイル名
+    失敗  nil
+  例
+    (dos_delete "acad.bak")
+    (dos_delete "*.bak")
+
+--------------------------------------------------
+
+dos_deltree  指定されたディレクトリ以下を削除
+  構文
+    (dos_deltree path)
+  引数
+    path  削除するディレクトリ
+  戻り値
+    成功  削除されたディレクトリ
+    失敗  nil
+  例
+    (dos_deltree "..\\test\\")
+
+--------------------------------------------------
+
+dos_demandload  起動時の自動ロード
+  構文
+    (dos_demandload [T])
+  引数
+    T  自動ロード ON
+  戻り値
+    T    自動ロード ON
+    nil  自動ロード OFF
+  例
+    (dos_demandload)
+    (dos_demandload t)
+
+--------------------------------------------------
+
+dos_dir  ファイル名のリストの作成
+  構文
+    (dos_dir [filespec])
+  引数
+    filespec  ファイル名
+  戻り値
+    成功  ファイル名のリスト
+    失敗  nil
+  例
+    (dos_dir "*.dwg")
+
+--------------------------------------------------
+
+dos_dirp  ディレクトリの存在のチェック
+  構文
+    (dos_dirp path)
+  引数
+    path  チェックするディレクトリ
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_dirp "c:\\temp\\")
+
+--------------------------------------------------
+
+dos_dos2unix  改行コードの変更(CRLF->LF)
+  構文
+    (dos_dos2unix source dest)
+  引数
+    source  元ファイル
+    dest    新しいファイル
+  戻り値
+    成功  新しいファイル名
+    失敗  nil
+  例
+    (dos_dos2unix "data.txt" "data.doc")
+
+--------------------------------------------------
+
+dos_drive  カレントドライブの取得・変更
+  構文
+    (dos_drive [drive])
+  引数
+    drive  ドライブ名(C:, D:)
+  戻り値
+    成功  カレントドライブ
+    失敗  nil
+  例
+    (dos_drive)
+    (dos_drive "d:")
+
+--------------------------------------------------
+
+dos_drivep  ドライブの存在のチェック
+  構文
+    (dos_drivep drive)
+  引数
+    drive  ドライブ名(C:,D:)
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_drivep "D:")
+
+--------------------------------------------------
+
+dos_drives  ドライブ名のリストの作成
+  構文
+  (dos_drives)
+  戻り値
+    成功  ドライブ名のリスト
+    失敗  nil
+  例
+    (dos_drives)
+
+--------------------------------------------------
+
+dos_drivetype  ドライブの種類の取得
+  構文
+    (dos_drivetype [drive])
+  引数
+    drive ドライブ名
+  戻り値
+    成功  FIXED または REMOVABLE または CDROM または RAMDISK または REMOTEREMOVABLE
+    失敗  nil
+  例
+    (dos_drivetype)
+    (dos_drivetype "c:")
+
+--------------------------------------------------
+
+dos_dwgpreview  DWGファイルのプレビューダイアログの表示
+  構文
+    (dos_dwgpreview title path [T])
+  引数
+    title  ダイアログのタイトル
+    path   DWGファイルのあるディレクトリ
+    T      背景を白に設定
+  戻り値
+    成功  選択されたファイルのフルパス
+    失敗  nil
+  例
+    (dos_dwgpreview "Insert a block" "c:\\blocks\\")
+    (dos_dwgpreview "Insert a block" "c:\\blocks\\" T)
+
+--------------------------------------------------
+
+dos_dwgver  DWGファイルのバージョンの取得
+  構文
+    (dos_dwgver filename)
+  引数
+    filename  DWGファイル名
+  戻り値
+    成功  DWGファイルのバージョン
+    失敗  nil
+  例
+    (dos_dwgver "test.dwg")
+
+--------------------------------------------------
+
+dos_editlist  リストの編集ダイアログボックスの表示
+  構文
+    (dos_editlist title message list)
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    list     編集するリスト
+  戻り値
+    成功  編集されたリスト
+    失敗  nil
+  例
+    (setq xyz '("layer1" "Layer2" "Layer3"))
+    (dos_editlist "Create Layers" "Layers to create" xyz)
+
+--------------------------------------------------
+
+dos_encrypt  ファイルの暗号化・復号化
+  構文
+    (dos_encrypt filename password)
+  引数
+    filename  変更するファイル名
+    password  パスワード
+  戻り値
+    成功  変更したファイル名
+    失敗  nil
+  例
+    (dos_encrypt "test.dwg" "password")
+
+--------------------------------------------------
+
+dos_execute  プログラムの実行
+  構文
+    (dos_execute command-line [show])
+  引数
+    command-line  プログラムファイル名
+    show          0 通常
+                  1 アクティブにしない
+                  2 最小化 アクティブ
+                  3 最小化
+                  4 最大化 アクティブ
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_execute "format.com a: /s")
+    (dos_execute "notepad.exe" 4)
+    (dos_execute "\"C:\\Program Files\\User\\MyPrg.exe\" -abc")
+
+--------------------------------------------------
+
+dos_exewait  プログラムの実行
+  構文
+    (dos_exewait command-line [show])
+  引数
+    command-line  プログラムファイル名
+    show          0 通常
+                  1 アクティブにしない
+                  2 最小化 アクティブ
+                  3 最小化
+                  4 最大化 アクティブ
+  戻り値
+    成功  T
+    失敗  nil
+  例
+
+    (dos_exewait "notepad.exe")
+    (dos_exewait "notepad.exe" 4)
+    (dos_exewait "\"C:\\Program Files\\User\\MyPrg.exe\" -abc")
+
+--------------------------------------------------
+
+dos_file  ファイル情報のリスト作成
+  構文
+    (dos_file filename)
+  引数
+    filename  チェックするファイル名
+  戻り値
+    成功  ファイル名、サイズ、更新日、更新時間、読み取り専用、隠しファイル、システム、アーカイブのリスト
+    失敗  nil
+  例
+    (dos_file "test.dwg")
+
+--------------------------------------------------
+
+dos_filedate  ファイルの更新日のリストの取得
+  構文
+    (dos_filedate filespec)
+  引数
+   filespec  ファイル名
+  戻り値
+    成功  ファイル名と更新日のリスト
+    失敗  nil
+  例
+    (dos_filedate "*.dwg")
+
+--------------------------------------------------
+
+dos_filep  ファイルの存在のチェック
+  構文
+    (dos_filep filename)
+  引数
+    filename  チェックするファイル名
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_filep "drawing.dwg")
+
+--------------------------------------------------
+
+dos_filesize  ファイル名とサイズのリスト作成
+  構文
+    (dos_filesize [filespec])
+  引数
+    filespec  ファイル名
+  戻り値
+    成功  ファイル名とサイズのリスト
+    失敗  nil
+  例
+    (dos_filesize)
+    (dos_filesize "c:\\drawings\\*.dwg")
+
+--------------------------------------------------
+
+dos_filesys  ファイルシステムの取得
+  構文
+    (dos_filesys [drive])
+  引数
+    drive  ドライブ名
+  戻り値
+    成功  FAT または NTFS または HPFS または CDFS または network drive
+    失敗  nil
+  例
+    (dos_filesys)
+    (dos_filesys "d:")
+
+--------------------------------------------------
+
+dos_find  ファイルの検索
+  構文
+    (dos_find filename [drive])
+  引数
+    filename  検索するファイル名
+    drive     検索するドライブ
+  戻り値
+    成功  見つかったファイルのフルパスのリスト
+    失敗  nil
+  例
+    (dos_find "acad.dwg")
+    (dos_find "acad.dwg" "x:")
+
+--------------------------------------------------
+
+dos_format  ディスクのフォーマット
+  構文
+    (dos_format drive)
+  引数
+    drive  ドライブ名(A:)
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_format "a:")
+
+--------------------------------------------------
+
+dos_fullpath  フルパスの作成
+  構文
+    (dos_fullpath path)
+  引数
+    path  相対パスやファイル名
+  戻り値
+    成功  フルパス
+    失敗  nil
+  例
+    (dos_fullpath "acad.dwg")
+    (dos_fullpath "..\\windows\\win.ini")
+    (dos_fullpath "c:")
+
+--------------------------------------------------
+
+dos_getcancel  実行の中断
+  構文
+    (dos_getcancel title message)
+    (dos_getcancel T)
+    (dos_getcancel)
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    T        ダイアログを閉じる
+  戻り値
+    ダイアログが表示している時    T
+    ダイアログが表示していない時  nil
+  例
+    (setq x 0)
+    (dos_getcancel "Test" "Testing, please wait") ;initialize
+    (while (and (dos_getcancel) (< x 10000)) ;check
+      (setq x (1+ x))
+    )
+    (if (= x 10000)
+      (dos_getcancel t) ;close
+    )
+
+--------------------------------------------------
+
+dos_getdir  ダイアログボックスを表示してのディレクトリの取得
+  構文
+    (dos_getdir title [path])
+  引数
+    title  ダイアログボックスのタイトル
+    path   ダイアログボックスの初期ディレクトリ
+  戻り値
+    成功  選択されたディレクトリのパス
+    失敗  nil
+  例
+    (dos_getdir "Select a Directory" "c:\\")
+
+--------------------------------------------------
+
+dos_getfilem  ダイアログボックスでのファイルの選択
+  構文
+    (dos_getfilem title path filter)
+  引数
+    title   ダイアログボックスのタイトル
+    path    表示するパス
+    filter  ファイルの種類
+  戻り値
+    成功  パスとフィル名のリスト
+    失敗  nil
+  例
+    (dos_getfilem "Select Drawings" "C:\\DRAWINGS\\" "Drawing Files(*.DWG)|*.DWG")
+    (dos_getfilem "Select Files" "C:\\FILES\\" "Text Files(*.TXT)|*.txt|All Files (*.*)|*.*")
+
+--------------------------------------------------
+
+dos_getini  INIファイルから値を取得
+  構文
+    (dos_getini section entry filename)
+  引数
+    section   INIファイルのセクション
+    entry     INIファイルのエントリー
+    filename  INIファイル名
+  戻り値
+    成功  設定したエントリーの値
+    失敗  nil
+  例
+    (dos_getini "drawings" "dwg1" "dwg.ini")
+
+--------------------------------------------------
+
+dos_getint  整数を取得するダイアログボックスを表示
+  構文
+    (dos_getint title message [default])
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    default  初期値
+  戻り値
+    成功  入力された整数
+    失敗  nil
+  例
+    (dos_getint "Copies" "Enter number of copies")
+
+--------------------------------------------------
+
+dos_getpassword  パスワードを取得するダイアログボックスを表示
+  構文
+    (dos_getpassword title message [default])
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    default  初期値
+  戻り値
+    成功  入力されたパスワード
+    失敗  nil
+  例
+    (dos_getpassword "Password" "Enter a Password")
+
+--------------------------------------------------
+
+dos_getprn  通常使うプリンタの取得
+  構文
+    (dos_getprn)
+  戻り値
+    成功  通常使うプリンタ
+    失敗  nil
+  例
+    (dos_getprn)
+
+--------------------------------------------------
+
+dos_getprogress  プログレスバーのダイアログボックスを表示
+  構文
+    (dos_getprogress title message maxvalue [T])
+    (dos_getprogress abs/-rel)
+    (dos_getprogress T)
+    (dos_getprogress)
+  引数
+    title     ダイアログのタイトル
+    message   ダイアログのメッセージ
+    maxvalue  プログレスバーの最大値
+    abs/-rel  プログレスバーの値/マイナスの時増加分
+    T         ダイアログを閉じる
+  戻り値
+    成功  実数
+    失敗  nil
+  例
+    (setq x 0 y 1000)
+    (dos_getprogress "Test" "Testing, please wait" y) ;initialize
+    (while (< x y)
+      (dos_getprogress -1) ;increment relative by 1
+      (setq x (1+ x))
+    )
+    (dos_getprogress t) ;close
+
+--------------------------------------------------
+
+dos_getreal  実数を取得するダイアログボックスを表示
+  構文
+    (dos_getreal title message [default])
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    default  初期値
+  戻り値
+    成功  入力された実数
+    失敗  nil
+  例
+    (dos_getstring "Text" "Enter some text")
+
+--------------------------------------------------
+
+dos_getstring 文字列を取得するダイアログボックスを表示
+  構文
+    (dos_getstring title message [default])
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    default  初期値
+  戻り値
+    成功  入力された文字列
+    失敗  nil
+  nil
+  例
+    (dos_getstring "Text" "Enter some text")
+
+--------------------------------------------------
+
+dos_help  DOSLIBのコマンド名の表示
+  構文
+  (dos_help)
+  戻り値
+    成功  DOSLIBのコマンド名のリスト
+    失敗  nil
+  例
+    (dos_help)
+
+--------------------------------------------------
+
+dos_hostname  ホスト名の取得
+  構文
+    (dos_hostname)
+  戻り値
+    成功  ホスト名
+    失敗  nil
+  例
+    (dos_hostname)
+
+--------------------------------------------------
+
+dos_ipaddress  IPアドレスの取得
+  構文
+    (dos_ipaddress)
+  戻り値
+    成功  IPアドレス
+    失敗  nil
+  例
+    (dos_ipaddress)
+
+--------------------------------------------------
+
+dos_label  ボリュームラベルの取得・設定
+  構文
+    (dos_label [drive [label]])
+  引数
+    drive  ドライブ名
+    label  ボリュームラベル名
+  戻り値
+    成功  ボリュームラベル
+    失敗  nil
+  例
+    (dos_label)
+    (dos_label "d:" "d-drive")
+
+--------------------------------------------------
+
+dos_listbox  リストから文字列を取得するダイアログボックスを表示
+  構文
+    (dos_listbox title message list)
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    list     リスト
+  戻り値
+    成功  選択された文字列
+    失敗  nil
+  例
+    (setq xyz '("layer1" "Layer2" "Layer3"))
+    (dos_listbox "Set Current Layer" "Select a layer" xyz)
+
+--------------------------------------------------
+
+dos_macaddress  MACアドレスの取得
+  構文
+    (dos_macaddress)
+  戻り値
+    成功  MACアドレス
+    失敗  nil
+  例
+    (dos_macaddress)
+
+--------------------------------------------------
+
+dos_makepath  パスの作成
+  構文
+    (dos_makepath drive directory filename extension)
+  引数
+    drive      ドライブ名
+    directory  ディレクトリ名
+    filename   ファイル名
+    extension  拡張子
+  戻り値
+    成功  パス
+    失敗  nil
+  例
+    (dos_makepath "c:" "\\acad" "acad" "exe")
+    (dos_makepath "c:" "\\acad" "" "")
+    (dos_makepath "" "\\acad" "acad" "exe")
+
+--------------------------------------------------
+
+dos_mem  メモリの使用状態の取得
+  構文
+    (dos_mem)
+  戻り値
+    成功  メモリ使用率、全メモリ容量、空きメモリ容量、全ページファイルの容量、
+          ページファイルの空き容量、全仮想メモリ容量、空き仮想メモリ容量
+    失敗  nil
+  例
+    (dos_mem)
+
+--------------------------------------------------
+
+dos_mkdir  ディレクトリの作成
+  構文
+    (dos_mkdir path)
+  引数
+    path  作成するディレクトリ名
+  戻り値
+    成功  ディレクトリ名
+    失敗  nil
+  例
+    (dos_mkdir "test")
+
+--------------------------------------------------
+
+dos_move  ファイルの移動
+  構文
+    (dos_move filename1 filename2)
+  引数
+    filename1  元ファイル名
+    filename2  新ファイル名
+  戻り値
+    成功  新ファイル名
+    失敗  nil
+  例
+    (dos_move "drawing.dwg" "c:\\backup\\drawing.dwg")
+
+--------------------------------------------------
+
+dos_msgbox  ダイアログボックスを表示
+  構文
+    (dos_msgbox text title button icon [duration])
+  成功
+    text      ダイアログのメッセージ
+    title     ダイアログのタイトル
+    button    0  中止 再試行 無視
+              1  OK
+              2  OK キャンセル
+              3  再試行 キャンセル
+              4  はい いいえ
+              5  はい いいえ キャンセル
+    icon      0 Asterisk
+              1 Exclamation
+              2 Hand
+              3 Information
+              4 Question
+              5 Stop
+    duration  ダイアログを閉じる時間（秒）
+              buttonが1,2,3,5の時  有効
+  戻り値
+    成功  0  中止
+          1  キャンセル
+          2  無視
+          3  いいえ
+          4  OK
+          5  再試行
+          6  はい
+    失敗  nil
+  例
+    (dos_msgbox "Are you sure?" "Save" 4 3)
+
+--------------------------------------------------
+
+dos_multilist  リストから文字列を取得するダイアログボックスを表示（複数選択可能）
+  構文
+    (dos_multilist title message list)
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    list     リスト
+  戻り値
+    成功  選択された文字列のリスト
+    失敗  nil
+  例
+    (setq xyz '("layer1" "Layer2" "Layer3"))
+    (dos_multilist "Freeze Layers" "Select layers t freeze" xyz)
+
+--------------------------------------------------
+
+dos_numlock  NumLockの設定
+  構文
+    (dos_numlock [T])
+  引数
+    T  NumLockをON
+  戻り値
+    NumLock ON   T
+    NumLock OFF  nil
+  例
+    (dos_numlock T)
+    (dos_numlock)
+
+--------------------------------------------------
+
+dos_openp  ファイルが開かれているかのチェック
+  構文
+    (dos_openp filename)
+  引数
+    filename  ファイル名
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_openp "drawing.dwg")
+
+--------------------------------------------------
+
+dos_orient  用紙の向きを設定
+  構文
+    (dos_orient printer [T])
+  引数
+    printer  プリンタ名
+    T        横に設定
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_orient (dos_getprn) T)
+    (dos_orient (dos_getprn))
+
+--------------------------------------------------
+
+dos_path  現在の検索パスの取得
+  構文
+    (dos_path)
+  戻り値
+    成功  検索パス
+    失敗  nil
+  例
+    (dos_path)
+
+--------------------------------------------------
+
+dos_pause  AutoCadの実行を一時中断
+  構文
+    (dos_pause duration)
+  引数
+    duration  時間（秒）0.001単位まで
+  戻り値
+    nil
+  例
+    (dos_pause 5.2)
+
+--------------------------------------------------
+
+dos_ping  pingの実行
+  構文
+    (dos_ping host/addr)
+  引数
+    host/addr  ホスト名／IPアドレス
+  戻り値
+    成功  IPアドレス、ホスト名、RTT
+    失敗  nil
+  例
+    (dos_ping "robert.mcneel.com")
+--------------------------------------------------
+
+dos_printers  インストールされているプリンタの取得
+  構文
+    (dos_printers)
+  戻り値
+    成功  インストールされているプリンタのリスト
+    失敗  nil
+  例
+    (dos_printers)
+
+--------------------------------------------------
+
+dos_processes  プロセスの取得
+  構文
+    (dos_processes [T])
+  引数
+    T  フルパス
+  戻り値
+    成功  EXEファイルのリスト
+    失敗  nil
+  例
+    (dos_processes)
+    (dos_processes T)
+
+--------------------------------------------------
+
+dos_progbar AutoCADのステータスバーにプログレスバーを表示
+  構文
+    (dos_progbar label maxvalue)
+    (dos_progbar abs/-rel)
+    (dos_progbar)
+  引数
+    label     メッセージ
+    maxvalue  プログレスバーの最大値
+    abs/-rel  プログレスバーの値/マイナスの時増加分
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_progbar "Wait..." 10)
+    (dos_progbar -1); move relative to previous location
+    (dos_progbar)
+
+--------------------------------------------------
+
+dos_proplist  値の編集ができるダイアログボックスを表示
+  構文
+    (dos_proplist title message list)
+  引数
+    title    ダイアログのタイトル
+    message  ダイアログのメッセージ
+    list     リスト
+  戻り値
+    成功  編集されたリスト
+    失敗  nil
+  例
+    (setq xyz '(("Title" . "Floorplan") ("Project" . "Project A")))
+    (dos_proplist "Drawing Properties" "Modify Properties" xyz)
+
+--------------------------------------------------
+
+dos_pwdir  カレントディレクトリの取得
+  構文
+    (dos_pwdir [drive])
+  引数
+    drive  ドライブ名
+  戻り値
+    成功  カレントディレクトリ
+    失敗  nil
+  例
+    (dos_pwdir)
+    (dos_pwdir "z:")
+
+--------------------------------------------------
+
+dos_random  ランダムな整数の取得
+  構文
+    (dos_random)
+  戻り値
+    整数
+  例
+    (dos_random)
+
+--------------------------------------------------
+
+dos_recent  最近使ったファイルのクリア・追加
+  構文
+    (dos_recent [filename])
+  引数
+    filename  ファイル名
+  戻り値
+    nil
+  例
+    (dos_recent)
+    (dos_recent "c:\\drawings\\drawing.dwg")
+
+--------------------------------------------------
+
+dos_regdel レジストリの削除
+  構文
+    (dos_regdel application section key [T])
+  引数
+    application  キー
+    section      キー
+    key          キー
+    T            HKEY_LOCAL_MACHINE\Software\DOSLib
+                 設定しないとHKEY_CURRENT_USER\Software\DOSLib
+  戻り値
+    成功  設定したキー名
+    失敗  nil
+  例
+    (dos_regget "CAD" "Project1" "User")
+    (dos_regget "CAD" "Project2" "User" T)
+
+--------------------------------------------------
+
+dos_regget  レジストリの取得
+  構文
+    (dos_regget application section key [T])
+  引数
+    application  キー
+    section      キー
+    key          キー
+    T            HKEY_LOCAL_MACHINE\Software\DOSLib
+                 設定しないとHKEY_CURRENT_USER\Software\DOSLib
+  戻り値
+    成功  設定したキーの値
+    失敗  nil
+  例
+    (dos_regset "CAD" "Project1" "User" "Dale")
+    (dos_regset "CAD" "Project2" "User" "Mary" T)
+
+--------------------------------------------------
+
+dos_regset  レジストリの設定
+  構文
+    (dos_regset application section key [T])
+  引数
+    application  キー
+    section      キー
+    key          キー
+    T            HKEY_LOCAL_MACHINE\Software\DOSLib
+                 設定しないとHKEY_CURRENT_USER\Software\DOSLib
+  戻り値
+    成功  設定したキーの値
+    失敗  nil
+  例
+    (dos_setini "drawings" "dwg1" "dwg1.dwg" "dwg.ini")
+    (dos_setini "drawings" "dwg1" nil "dwg.ini")
+
+--------------------------------------------------
+
+dos_rename ファイル名の変更
+  構文
+    (dos_rename oldfilename newfilename)
+  引数
+    oldfilename  現在のファイル名
+    newfilename  新しいファイル名
+  戻り値
+    成功  新しいファイル名
+    失敗  nil
+  例
+    (dos_rename "drawing.dwg" "drawing.bak")
+
+--------------------------------------------------
+
+dos_rendir  ディレクトリの名前の変更
+  構文
+    (dos_rendir oldpath newpath)
+  引数
+    oldpath  現在のディレクトリ名
+    newpath  新しいディレクトリ名
+  戻り値
+    成功  新しいディレクトリ名
+    失敗  nil
+  例
+    (dos_rendir "test" "backup")
+    (dos_rendir "backup" "support")
+
+--------------------------------------------------
+
+dos_rmdir  ディレクトリの削除
+  構文
+    (dos_rmdir path)
+  引数
+    path  削除するディレクトリ名（空のディレクトリ）
+  戻り値
+    成功  削除されたディレクトリ名
+    失敗  nil
+  例
+    (dos_rmdir "test")
+    (dos_rmdir "\\drawings")
+
+--------------------------------------------------
+
+dos_saveall  開いている全ての図面を保存する (AutoCAD2000)
+  構文
+    (dos_saveall)
+  戻り値
+    nil
+  例
+    (dos_saveall)
+
+--------------------------------------------------
+
+dos_scrolllock  ScrollLockの設定
+  構文
+    (dos_scrolllock [T])
+  引数
+    T  ScrollLockをON
+  戻り値
+    ScrollLock ON   T
+    ScrollLock OFF  nil
+  例
+    (dos_scrolllock T)
+    (dos_scrolllock)
+
+--------------------------------------------------
+
+dos_search   ファイル名の検索
+  構文
+    (dos_search filename environment)
+  引数
+   filename     検索するファイル名
+   environment  検索するパスのリスト
+  戻り値
+    成功  ファイル名
+    失敗  nil
+  例
+    (dos_search "acad.exe" (dos_path))
+    (dos_search "acad.exe" nil)
+
+--------------------------------------------------
+
+dos_serialno  ディスクのシリアルＮｏの取得
+  構文
+    (dos_serialno [drive])
+  引数
+    drive  ドライブ名
+  戻り値
+    成功  シリアルＮｏ
+    失敗  nil
+  例
+    (dos_serialno)
+    (dos_serialno "d:")
+
+--------------------------------------------------
+
+dos_setini  INIファイルに値を設定
+  構文
+    (dos_setini section entry string filename)
+  引数
+    section   セクション名
+    entry     エントリー名
+    string    値
+    filename  INIファイル名
+  戻り値
+    成功  値
+    失敗  nil
+  例
+    (dos_setini "drawings" "dwg1" "dwg1.dwg" "dwg.ini")
+    (dos_setini "drawings" "dwg1" nil "dwg.ini")
+
+--------------------------------------------------
+
+dos_setprn  通常使うプリンタの設定
+  構文
+    (dos_setprn printer)
+  引数
+    printer  プリンタ名
+  戻り値
+    成功  プリンタ名
+    失敗  nil
+  例
+    (dos_setprn (car (dos_printers)))
+
+--------------------------------------------------
+
+dos_shellexe  ファイルのオープン、印刷、実行
+  構文
+    (dos_shellexe file parameters [operation [show]])
+  引数
+    file        ファイル名
+    parameters  パラメータ
+    operation   0 開く
+                1 印刷
+                2 ディレクトリを開く
+    show        0 通常
+                1 アクティブにしない
+                2 最小化 アクティブ
+                3 最小化
+                4 最大化 アクティブ
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_shellexe "notepad.exe" "readme.txt")
+    (dos_shellexe "www.mcneel.com" nil)
+    (dos_shellexe "c:\\drawings\\" nil 2)
+
+--------------------------------------------------
+
+dos_show  AutoCADのウィンドウの操作
+  構文
+    (dos_show method)
+  引数
+    method  0 最大化
+            1 最小化
+            2 元に戻す
+  戻り値
+    nil
+  例
+    (dos_show 0)
+
+--------------------------------------------------
+
+dos_sortlist  リストのソート
+  構文
+    (dos_sortlist list)
+  引数
+    list  文字列か整数か実数のリスト
+  戻り値
+    成功  ソートされたリスト
+    失敗  nil
+  例
+    (dos_sortlist '(4 3 6 5 7 1 2))
+
+--------------------------------------------------
+
+dos_speaker  指定された音を鳴らす
+  構文
+    (dos_speaker frequency duration)
+  引数
+    frequency  周波数
+    duration   ミリ秒
+  戻り値
+    nil
+  例
+    (dos_speaker 1000 100)
+
+--------------------------------------------------
+
+dos_splash  スプラッシュウィンドウを表示
+  構文
+    (dos_splash filename duration)
+  引数
+    filename  ビットマップファイル名
+    duration  表示する時間（秒）
+  戻り値
+   nil
+  例
+    (dos_splash "mylogo.bmp" 5)
+
+--------------------------------------------------
+
+dos_splitpath  パスの分割
+  構文
+    (dos_splitpath path)
+  引数
+    path  フルパスのファイル名やディレクトリ名
+  戻り値
+    成功  ドライブ名、ディレクトリ名、ファイル名、拡張子のリスト
+    失敗  nil
+  例
+    (dos_splitpath "c:\\acad\\acad.exe")
+    (dos_splitpath "c:\\acad\\")
+    (dos_splitpath "c:\\acad")
+
+--------------------------------------------------
+
+dos_spool  スプールにあるかのチェック
+  構文
+    (dos_spool filename printer)
+  引数
+    filename  チェックするファイル名
+    printer   チェックするプリンタ名
+  戻り値
+    成功  ファイル名
+    失敗  nil
+  例
+    (setq default_printer (dos_getprn))
+    (dos_spool "test.dwg" default_printer)
+
+--------------------------------------------------
+
+dos_subdir  サブディレクトリのリストの作成
+  構文
+    (dos_subdir [path])
+  引数
+    path  元になるパス
+  戻り値
+    成功  サブディレクトリ名のリスト
+    失敗  nil
+  例
+    (dos_subdir)
+    (dos_subdir "c:\\")
+
+--------------------------------------------------
+
+dos_sysdir  システムディレクトリの取得
+  構文
+    (dos_sysdir)
+  戻り値
+    成功  システムディレクトリのパス
+    失敗  nil
+  例
+    (dos_sysdir)
+
+--------------------------------------------------
+
+dos_tempdir  一時ファイルのためのディレクトリの取得
+  構文
+    (dos_tempdir)
+  戻り値
+    成功  一時ファイルのためのディレクトリのパス
+    失敗  nil
+  例
+    (dos_tempdir)
+
+--------------------------------------------------
+
+dos_time  時間の取得・設定
+  構文
+    (dos_time [time])
+  引数
+    time  時間
+  戻り値
+    成功  時間
+    失敗  nil
+  例
+    (dos_time)
+    (dos_time "17:00")
+
+--------------------------------------------------
+
+dos_touch  ファイルの作成日時、更新日時を実行時の時間にする
+  構文
+    (dos_touch filespec)
+  引数
+    filespec  ファイル名
+  戻り値
+    成功  ファイル名のリスト
+    失敗  nil
+  例
+    (dos_touch "c:\\drawings\\*.*")
+
+--------------------------------------------------
+
+dos_unix2dos  改行コードの変更(LF->CRLF)
+  構文
+    (dos_unix2dos source dest)
+  引数
+    source  元ファイル
+    dest    新ファイル
+  戻り値
+    成功  新ファイル名
+    失敗  nil
+  例
+    (dos_unix2dos "data.doc" "data.txt")
+
+--------------------------------------------------
+
+dos_username  ユーザー名の取得
+  構文
+    (dos_username)
+  戻り値
+    成功  ユーザー名
+    失敗  nil
+  例
+    (dos_username)
+
+--------------------------------------------------
+
+dos_ver OSのバージョンの取得
+  構文
+    (dos_ver)
+  戻り値
+    成功  OSのバージョン
+    失敗  nil
+  例
+    (dos_ver)
+
+--------------------------------------------------
+
+dos_version  DOSLIBのバージョンの取得
+  構文
+    (dos_version)
+  戻り値
+    成功  DOSLIBのバージョン
+    失敗  nil
+  例
+    (dos_version)
+
+--------------------------------------------------
+
+dos_waitcursor  カーソルの変更
+  構文
+    (dos_waitcursor [T])
+  引数
+    T  カーソルを砂時計に変更
+  戻り値
+    砂時計カーソル T
+    元に戻す       nil
+  例
+    (dos_waitcursor T)
+    (dos_waitcursor)
+
+--------------------------------------------------
+
+dos_wav  WAVファイルの再生
+  構文
+    (dos_wav filename)
+  引数
+    filename  WAVファイル名
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_wav "boink.wav")
+
+--------------------------------------------------
+
+dos_windir  ウィンドウズディレクトリの取得
+  構文
+    (dos_windir)
+  戻り値
+    成功  ウィンドウズディレクトリのパス
+    失敗  nil
+  例
+    (dos_windir)
+
+--------------------------------------------------
+
+dos_winhelp  ヘルプファイルの表示
+  構文
+    (dos_winhelp filename [index/topic])
+  引数
+    filename     ヘルプファイル名
+    index/topic  インデックス／トピックス
+  戻り値
+    成功  T
+    失敗  nil
+  例
+    (dos_winhelp "myhelp.hlp")
+    (dos_winhelp "myhelp.hlp" "Introduction")
+
+--------------------------------------------------
+
+dos_language  (オリジナル) 現在のAutoCADの言語を返す
+  構文
+    (dos_language)
+  戻り値
+    全て大文字の言語文字列
+  例
+    (dos_language)
+    日本語の場合は、"JAPANESE" が返る
+
+--------------------------------------------------
+
+ファイル名の記述方法
+ (1) 絶対パス       "C:\\Program Files\\AutoCAD 2000\\aaa.dwg"
+ (2) 相対パス       "..\\Data\\aaa.dwg" / ".\\Data\\aaa.dwg"
+ (3) カレント       "aaa.dwg"
+ (4) ワイルドカード "*.dwg" (対応関数のみ)
+
+パス名の記述方法
+ (1) 絶対パス       "C:\\Program Files\\AutoCAD 2000\\"
+ (2) 相対パス       "..\\Data\\" / ".\\Data\\"
+ (3) カレント       (未指定)
+ (4) ルートパス     "\\Data Files\\"
+
+ドライブの記述方法
+ (1) 直接指定       "A:\\"
+ (2) カレント       (未指定)
+
+2001-07-25 ... 初版
+2007-12-18 ... 著作権名義を更新

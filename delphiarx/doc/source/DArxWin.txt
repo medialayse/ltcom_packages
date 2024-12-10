@@ -1,0 +1,23 @@
+unit DArxWin;
+
+// ******************************************************
+//     DelphiARX2002 MessageBox hook functions.
+//
+//     Copyright(C)2008 medialayse corporation.
+//     2008-05-15  SOFTWARE DESIGN ATELIER SITE
+// ******************************************************
+
+interface
+
+uses
+  Windows, SysUtils;
+
+type
+  TDMessageBoxCallback = procedure(const MsgWindow: HWND; const MsgText, MsgCaption: String; MsgType: Cardinal; var ResCode: Integer);
+
+function HookMessageBox(const Callback: TDMessageBoxCallback): Boolean;
+procedure UnhookMessageBox;
+
+implementation
+
+end.

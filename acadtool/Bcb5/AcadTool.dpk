@@ -1,0 +1,47 @@
+package AcadTool;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'AutoCAD Customize Tool Components D5'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  Vclx50,
+  dsnide50;
+
+contains
+  AcTolReg in 'AcTolReg.pas',
+  AcadFunc,
+  AcadVInf,
+  AcadUnit,
+  AcadDraw,
+  AcadClr,
+  AcadPlot,
+  AcadCtrl,
+  AcadDwgV,
+  AcClrDlg,
+  AcDwgDlg,
+  AcThread;
+
+end.

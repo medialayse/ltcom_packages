@@ -1,0 +1,57 @@
+unit DArxList;
+
+// ******************************************************
+//          DelphiARX2002 New TList Unit.
+//
+//     Copyright(C)2008 medialayse corporation.
+//     2008-05-15  SOFTWARE DESIGN ATELIER SITE
+// ******************************************************
+
+interface
+
+uses
+  SysUtils, Classes;
+
+type
+  PPointerList = ^TPointerList;
+  TPointerList = array[0..MaxListSize - 1] of Pointer;
+  TDListSortCompare = function (Item1, Item2: Pointer): Integer;
+
+  TDList = class(TObject)
+  private
+    FList: PPointerList;
+    FCount: Integer;
+    FCapacity: Integer;
+    FDelta: Integer;
+  protected
+    function Get(Index: Integer): Pointer;
+    procedure Grow; virtual;
+    procedure Put(Index: Integer; Item: Pointer);
+    procedure SetCapacity(NewCapacity: Integer);
+    procedure SetCount(NewCount: Integer);
+  public
+    constructor Create(ADelta: Integer);
+    destructor Destroy; override;
+    function Add(Item: Pointer): Integer;
+    procedure Clear; dynamic;
+    procedure Delete(Index: Integer);
+    class procedure Error(const Msg: string; Data: Integer); virtual;
+    procedure Exchange(Index1, Index2: Integer);
+    function Expand: TDList;
+    function First: Pointer;
+    function IndexOf(Item: Pointer): Integer;
+    procedure Insert(Index: Integer; Item: Pointer);
+    function Last: Pointer;
+    procedure Move(CurIndex, NewIndex: Integer);
+    function Remove(Item: Pointer): Integer;
+    procedure Pack;
+    procedure Sort(Compare: TDListSortCompare);
+    property Capacity: Integer read FCapacity write SetCapacity;
+    property Count: Integer read FCount write SetCount;
+    property Items[Index: Integer]: Pointer read Get write Put; default;
+    property List: PPointerList read FList;
+  end;
+
+implementation
+
+end.
